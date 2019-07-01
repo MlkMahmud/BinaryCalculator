@@ -36,9 +36,9 @@
       //  Output Result
       function solution() {
         // Extract a valid mathemetical expression
-        let result = display.innerText.match(/\d+\W\d+(\W\d+)*/g);
+        let result = display.innerText.match(/\d+[+*\/\-]\d+([+*\/\-]\d+)*/g);
         if (result && result[0] === display.innerText) {
-          //  covert all numbers to base 10
+          // covert all numbers to base 10
           result = result[0]
             .replace(/\W/g, ' $& ')
             .split(' ')
@@ -50,10 +50,10 @@
               }
             });
 
-          //	Use the eval function to calculate the string and convert the result back to binary
-          display.innerText = eval(result.join(' ')).toString(2);
+          //  calculate the result and convert the result back to binary
+          display.innerText = eval(result.join('')).toString(2);
         } else {
-          display.innerText = 'Err';
+          display.innerText = 'INVALID EXPRESSION';
         }
       }
 
