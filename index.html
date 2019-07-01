@@ -35,11 +35,12 @@
 
       //  Output Result
       function solution() {
-        let result = display.innerText.match(/\d+\W\d+(\W\d+)*/g);
+        // Extract a valid mathemetical expression
+        let result = display.innerText.match(/\d+[+*\/\-]\d+([+*\/\-]\d+)*/g);
         if (result && result[0] === display.innerText) {
-          //  Convert the first match in the array to a seperate array and covert all numbers to base 10
+          // covert all numbers to base 10
           result = result[0]
-            .replace(/\W/, ' $& ')
+            .replace(/\W/g, ' $& ')
             .split(' ')
             .map((x) => {
               if (!isNaN(Number(x))) {
@@ -47,20 +48,12 @@
               } else {
                 return x;
               }
-            })
-            //	Covert Base 10 numbers to String;
-            .map((x) => {
-              if (!isNaN(Number(x))) {
-                return String(x);
-              } else {
-                return x;
-              }
             });
 
-          //	Use the eval function to calculate the string and convert the result back to binary
-          display.innerText = eval(result.join(' ')).toString(2);
+          //  calculate the result and convert the result back to binary
+          display.innerText = eval(result.join('')).toString(2);
         } else {
-          display.innerText = 'Err';
+          display.innerText = 'INVALID EXPRESSION';
         }
       }
 
